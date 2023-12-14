@@ -1,0 +1,19 @@
+comment: ''
+commit: unknown
+commit_message: ''
+distributed_rank: 0
+distributed_world_size: 0
+is_dirty: false
+load_run: 11a6408a8abc11eebdaa5cff35c18db0
+name: cycle_gan_inference
+notes: ''
+python_file: C:\Users\Lenovo\Desktop\cycle-gan\eval.py
+repo_remotes: []
+start_step: 293006
+tags:
+- gan
+- inference
+- cycle
+trial_date: '2023-12-14'
+trial_time: '19:04:50'
+uuid: 9a0127839a7011ee8a62f077c319d74a

@@ -1,0 +1,19 @@
+comment: ''
+commit: unknown
+commit_message: ''
+distributed_rank: 0
+distributed_world_size: 0
+is_dirty: false
+load_run: 11a6408a8abc11eebdaa5cff35c18db0
+name: cycle_gan_inference
+notes: ''
+python_file: eval.py
+repo_remotes: []
+start_step: 293006
+tags:
+- gan
+- inference
+- cycle
+trial_date: '2023-12-14'
+trial_time: '15:15:35'
+uuid: 92f3d46c9a5011eea391f077c319d74a

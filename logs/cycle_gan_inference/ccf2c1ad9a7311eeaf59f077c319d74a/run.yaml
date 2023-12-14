@@ -1,0 +1,20 @@
+comment: ''
+commit: bcebbff91705782ece9ad3201a6c3965ea7a197b
+commit_message: Finish Raw Website
+distributed_rank: 0
+distributed_world_size: 0
+is_dirty: true
+load_run: 11a6408a8abc11eebdaa5cff35c18db0
+name: cycle_gan_inference
+notes: ''
+python_file: C:\Users\Lenovo\Desktop\cycle-gan\eval.py
+repo_remotes:
+- https://github.com/gumusserv/AI3603-Final-Web.git
+start_step: 293006
+tags:
+- gan
+- cycle
+- inference
+trial_date: '2023-12-14'
+trial_time: '19:27:44'
+uuid: ccf2c1ad9a7311eeaf59f077c319d74a

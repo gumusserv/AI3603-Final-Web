@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Slider transitions</title>
+  <link rel='stylesheet' href='https://cdn.rawgit.com/filipelinhares/ress/master/dist/ress.min.css'><link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- Page Wrap -->
+
+<div class="page-wrap">
+    <div class="refresh-container">
+        <a href="./" class="refresh-tab" id="refresh-tab">Try New Image</a>
+      </div>
+  <div class="tab-container top-right">
+    <a href="../" class="tab">Home</a>
+    <a href="./apply" class="tab">Quickly Start</a>
+  </div>
+
+  
+  
+  <div id="home-slider">
+    
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <!-- 第一个滑块 -->
+<div class="swiper-slide swiper-slide-one">
+    <!-- Left Image Upload and Display (有上传标识) -->
+    <div class="image-upload-container left">
+        <div class="image-text left-text" style="display: none;">Original Image</div>
+      <input type="file" id="upload-1" class="upload-box" accept="image/*" />
+      <label for="upload-1" class="upload-label">
+        <div class="upload-instructions">Drag here or selcet from you computer to play with our models</div>
+      </label>
+      <img id="image-left-1" class="uploaded-image" />
+    </div>
+  
+    <!-- Right Image Display (无上传标识) -->
+    <div class="image-upload-container right">
+        <div class="image-text right-text" style="display: none;">Produced by CycleGan</div>
+        <img id="image-right-1" class="uploaded-image" />
+      </div>
+  </div>
+  
+  <!-- 第二个滑块 -->
+  <div class="swiper-slide swiper-slide-two">
+    <!-- Left Image Display (无上传标识) -->
+    <div class="image-upload-container left">
+        <div class="image-text left-text" style="display: none;">Original Image</div>
+      <img id="image-left-2" class="uploaded-image" />
+    </div>
+  
+    <!-- Right Image Display (无上传标识) -->
+    <div class="image-upload-container right">
+        <div class="image-text right-text" style="display: none;">Produced by Diffusion</div>
+        <img id="image-right-2" class="uploaded-image" />
+      </div>
+  </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js'></script><script  src="/static/js/script.js"></script>
+
+</body>
+</html>

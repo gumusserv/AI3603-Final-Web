@@ -1,0 +1,12 @@
+diff --git a/data/cycle_gan/monet2photo.zip b/data/cycle_gan/monet2photo.zip
+deleted file mode 100644
+index 80795ea..0000000
+Binary files a/data/cycle_gan/monet2photo.zip and /dev/null differ
+diff --git a/data/cycle_gan/real2mural.zip b/data/cycle_gan/real2mural.zip
+deleted file mode 100644
+index bae0fed..0000000
+Binary files a/data/cycle_gan/real2mural.zip and /dev/null differ
+diff --git "a/data/cycle_gan/\342\225\233\342\224\274\342\225\224\302\275\342\224\254\342\225\243.mkv" "b/data/cycle_gan/\342\225\233\342\224\274\342\225\224\302\275\342\224\254\342\225\243.mkv"
+deleted file mode 100644
+index 365af7b..0000000
+Binary files "a/data/cycle_gan/\342\225\233\342\224\274\342\225\224\302\275\342\224\254\342\225\243.mkv" and /dev/null differ

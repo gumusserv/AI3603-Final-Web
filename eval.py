@@ -698,7 +698,7 @@ def train():
 
 import numpy as np
 
-def plot_image(img: torch.Tensor, save_path='save.jpg'):
+def plot_image(img: torch.Tensor, width, height, save_path='save.jpg'):
     """
     ### Plot an image with matplotlib
     """
@@ -717,9 +717,20 @@ def plot_image(img: torch.Tensor, save_path='save.jpg'):
     # We don't need axes
     plt.axis('off')
     # Save the figure
-    plt.savefig(save_path)
+    plt.savefig(save_path, bbox_inches='tight', pad_inches=0)
+
+
+    
+    image = Image.open(save_path)
+
+    # 调整图片尺寸
+    new_size = (width, height)
+    resized_image = image.resize(new_size, Image.ANTIALIAS)
+
+    # 可以选择保存调整后的图片
+    resized_image.save(save_path)
     # Display
-    # plt.show()
+    plt.show()
 
     
     # Clear the current figure to free memory
@@ -922,6 +933,12 @@ def original_evaluate(image_path):
     for dir_path in dirs_to_create:
         shutil.copy(image_path, dir_path)
 
+    image = Image.open(image_path)
+
+    # 获取图片的尺寸
+    width, height = image.size
+
+
     # Start the experiment
     with experiment.start():
         # Image transformations
@@ -941,6 +958,9 @@ def original_evaluate(image_path):
         # Display the image
         # plot_image(x_image)
 
+        # 获取原图尺寸
+        original_size = x_image.size()[1:]  # size返回的是(channels, height, width)
+
         # Evaluation mode
         conf.generator_xy.eval()
         conf.generator_yx.eval()
@@ -953,9 +973,9 @@ def original_evaluate(image_path):
 
         shutil.rmtree("data/cycle_gan/tmp")
         # Display the generated image.
-        return plot_image(generated_y[0].cpu())
+        return plot_image(generated_y[0].cpu(), width, height)
 
 if __name__ == '__main__':
     # train()
     # evaluate(0)
-    original_evaluate()
+    original_evaluate('figure3.jpg')

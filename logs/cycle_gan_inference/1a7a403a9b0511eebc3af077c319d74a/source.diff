@@ -1,0 +1,13 @@
+diff --git a/eval.py b/eval.py
+index 34379c3..3d67f78 100644
+--- a/eval.py
++++ b/eval.py
+@@ -958,4 +958,4 @@ def original_evaluate(image_path):
+ if __name__ == '__main__':
+     # train()
+     # evaluate(0)
+-    original_evaluate()
++    original_evaluate('figure1.jpg')
+diff --git a/save.jpg b/save.jpg
+index c352a28..9c0ad48 100644
+Binary files a/save.jpg and b/save.jpg differ

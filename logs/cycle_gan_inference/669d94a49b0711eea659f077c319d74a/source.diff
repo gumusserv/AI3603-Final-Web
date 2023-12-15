@@ -1,0 +1,81 @@
+diff --git a/eval.py b/eval.py
+index 34379c3..cb390e2 100644
+--- a/eval.py
++++ b/eval.py
+@@ -53,7 +53,7 @@ from labml_helpers.device import DeviceConfigs
+ from labml_helpers.module import Module
+ 
+ import matplotlib
+-matplotlib.use('Agg')  # 设置为 'Agg' 后端
++# matplotlib.use('Agg')  # 设置为 'Agg' 后端
+ import matplotlib.pyplot as plt
+ 
+ class GeneratorResNet(Module):
+@@ -698,12 +698,11 @@ def train():
+ 
+ import numpy as np
+ 
+-def plot_image(img: torch.Tensor, save_path='save.jpg'):
++def plot_image(img: torch.Tensor, original_size, save_path='save.jpg'):
+     """
+     ### Plot an image with matplotlib
+     """
+-    
+-
++    dpi = 300
+     # Move tensor to CPU
+     img = img.cpu()
+     # Get min and max values of the image for normalization
+@@ -712,20 +711,22 @@ def plot_image(img: torch.Tensor, save_path='save.jpg'):
+     img = (img - img_min) / (img_max - img_min + 1e-5)
+     # We have to change the order of dimensions to HWC.
+     img = img.permute(1, 2, 0)
++    # Set the figure size to original image size
++    plt.figure(figsize=(original_size[0]/dpi, original_size[1]/dpi))
+     # Show Image
+     plt.imshow(img)
+     # We don't need axes
+     plt.axis('off')
+-    # Save the figure
+-    plt.savefig(save_path)
++    # Save the figure without padding and at the original resolution
++    plt.savefig(save_path, bbox_inches='tight', pad_inches=0, dpi=dpi)
+     # Display
+-    # plt.show()
+-
++    plt.show()
+     
+     # Clear the current figure to free memory
+     plt.clf()
+     return save_path
+ 
++
+ def plot_images_grid(imgs):
+     """
+     ### Plot images in a grid layout with matplotlib
+@@ -922,6 +923,10 @@ def original_evaluate(image_path):
+     for dir_path in dirs_to_create:
+         shutil.copy(image_path, dir_path)
+ 
++    # 获取原始图片尺寸
++    original_img = Image.open(image_path)
++    original_size = original_img.size  # (width, height)
++
+     # Start the experiment
+     with experiment.start():
+         # Image transformations
+@@ -953,9 +958,9 @@ def original_evaluate(image_path):
+ 
+         shutil.rmtree("data/cycle_gan/tmp")
+         # Display the generated image.
+-        return plot_image(generated_y[0].cpu())
++        return plot_image(generated_y[0].cpu(), original_size)
+ 
+ if __name__ == '__main__':
+     # train()
+     # evaluate(0)
+-    original_evaluate()
++    original_evaluate('test.jpg')
+diff --git a/save.jpg b/save.jpg
+index c352a28..dad4b6b 100644
+Binary files a/save.jpg and b/save.jpg differ

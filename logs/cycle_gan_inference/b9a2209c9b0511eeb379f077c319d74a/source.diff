@@ -1,0 +1,22 @@
+diff --git a/eval.py b/eval.py
+index 34379c3..a9284b4 100644
+--- a/eval.py
++++ b/eval.py
+@@ -719,7 +719,7 @@ def plot_image(img: torch.Tensor, save_path='save.jpg'):
+     # Save the figure
+     plt.savefig(save_path)
+     # Display
+-    # plt.show()
++    plt.show()
+ 
+     
+     # Clear the current figure to free memory
+@@ -958,4 +958,4 @@ def original_evaluate(image_path):
+ if __name__ == '__main__':
+     # train()
+     # evaluate(0)
+-    original_evaluate()
++    original_evaluate('test.jpg')
+diff --git a/save.jpg b/save.jpg
+index c352a28..a2d648f 100644
+Binary files a/save.jpg and b/save.jpg differ

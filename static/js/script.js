@@ -38,10 +38,12 @@ document.getElementById('upload-1').addEventListener('change', function(e) {
       const reader = new FileReader();
       reader.onload = function(event) {
           const leftImages = document.querySelectorAll('.swiper-slide .image-upload-container.left .uploaded-image');
+          // const texts = document.querySelectorAll('.swiper-slide .image-text');
           leftImages.forEach(img => {
               img.src = event.target.result;
               img.style.display = 'block';
           });
+          // texts.forEach(text => text.style.display = 'block');
       };
       reader.readAsDataURL(file);
 
@@ -57,10 +59,12 @@ document.getElementById('upload-1').addEventListener('change', function(e) {
       .then(imageBlob => {
           // 创建一个本地 URL，指向处理后的图片
           const imageObjectURL = URL.createObjectURL(imageBlob);
+          const texts = document.querySelectorAll('.swiper-slide .image-text');
           document.querySelectorAll('.swiper-slide .image-upload-container.right .uploaded-image').forEach(img => {
               img.src = imageObjectURL;
               img.style.display = 'block';
           });
+          texts.forEach(text => text.style.display = 'block');
       })
       .catch(error => console.error('Error:', error));
   }

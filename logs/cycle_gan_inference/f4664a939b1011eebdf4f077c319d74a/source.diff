@@ -1,0 +1,205 @@
+diff --git a/__pycache__/eval.cpython-38.pyc b/__pycache__/eval.cpython-38.pyc
+index 9554885..8c99ec1 100644
+Binary files a/__pycache__/eval.cpython-38.pyc and b/__pycache__/eval.cpython-38.pyc differ
+diff --git a/eval.py b/eval.py
+index 34379c3..56990f3 100644
+--- a/eval.py
++++ b/eval.py
+@@ -698,7 +698,7 @@ def train():
+ 
+ import numpy as np
+ 
+-def plot_image(img: torch.Tensor, save_path='save.jpg'):
++def plot_image(img: torch.Tensor, width, height, save_path='save.jpg'):
+     """
+     ### Plot an image with matplotlib
+     """
+@@ -717,9 +717,20 @@ def plot_image(img: torch.Tensor, save_path='save.jpg'):
+     # We don't need axes
+     plt.axis('off')
+     # Save the figure
+-    plt.savefig(save_path)
++    plt.savefig(save_path, bbox_inches='tight', pad_inches=0)
++
++
++    
++    image = Image.open(save_path)
++
++    # 调整图片尺寸
++    new_size = (width, height)
++    resized_image = image.resize(new_size, Image.ANTIALIAS)
++
++    # 可以选择保存调整后的图片
++    resized_image.save(save_path)
+     # Display
+-    # plt.show()
++    plt.show()
+ 
+     
+     # Clear the current figure to free memory
+@@ -922,6 +933,12 @@ def original_evaluate(image_path):
+     for dir_path in dirs_to_create:
+         shutil.copy(image_path, dir_path)
+ 
++    image = Image.open(image_path)
++
++    # 获取图片的尺寸
++    width, height = image.size
++
++
+     # Start the experiment
+     with experiment.start():
+         # Image transformations
+@@ -941,6 +958,9 @@ def original_evaluate(image_path):
+         # Display the image
+         # plot_image(x_image)
+ 
++        # 获取原图尺寸
++        original_size = x_image.size()[1:]  # size返回的是(channels, height, width)
++
+         # Evaluation mode
+         conf.generator_xy.eval()
+         conf.generator_yx.eval()
+@@ -953,9 +973,9 @@ def original_evaluate(image_path):
+ 
+         shutil.rmtree("data/cycle_gan/tmp")
+         # Display the generated image.
+-        return plot_image(generated_y[0].cpu())
++        return plot_image(generated_y[0].cpu(), width, height)
+ 
+ if __name__ == '__main__':
+     # train()
+     # evaluate(0)
+-    original_evaluate()
++    original_evaluate('figure3.jpg')
+diff --git a/save.jpg b/save.jpg
+index c352a28..bd9efb5 100644
+Binary files a/save.jpg and b/save.jpg differ
+diff --git a/static/css/e536a8e4d0.jpg b/static/css/e536a8e4d0.jpg
+deleted file mode 100644
+index 2fd1dc1..0000000
+Binary files a/static/css/e536a8e4d0.jpg and /dev/null differ
+diff --git a/static/css/e693f37abc.jpg b/static/css/e693f37abc.jpg
+deleted file mode 100644
+index 1360301..0000000
+Binary files a/static/css/e693f37abc.jpg and /dev/null differ
+diff --git a/static/css/e862b2a488.jpg b/static/css/e862b2a488.jpg
+deleted file mode 100644
+index 6da234f..0000000
+Binary files a/static/css/e862b2a488.jpg and /dev/null differ
+diff --git a/static/css/result.jpg b/static/css/result.jpg
+deleted file mode 100644
+index 6e0d198..0000000
+Binary files a/static/css/result.jpg and /dev/null differ
+diff --git a/static/css/result2.jpg b/static/css/result2.jpg
+index a4b20ad..a73db52 100644
+Binary files a/static/css/result2.jpg and b/static/css/result2.jpg differ
+diff --git a/static/css/result3.jpg b/static/css/result3.jpg
+index 7a91f1d..33b72eb 100644
+Binary files a/static/css/result3.jpg and b/static/css/result3.jpg differ
+diff --git a/static/css/style.css b/static/css/style.css
+index c26c207..5a300af 100644
+--- a/static/css/style.css
++++ b/static/css/style.css
+@@ -82,15 +82,15 @@ Home Slider
+ }
+ 
+ .swiper-image-one {
+-  background-image: url(e536a8e4d0.jpg);
++  background-image: url(figure1.jpg);
+ }
+ 
+ .swiper-image-two {
+-  background-image: url(result.jpg);
++  background-image: url(result1.jpg);
+ }
+ 
+ .swiper-image-three {
+-  background-image: url(e693f37abc.jpg);
++  background-image: url(figure2.jpg);
+ }
+ 
+ .swiper-image-four {
+@@ -98,7 +98,7 @@ Home Slider
+ }
+ 
+ .swiper-image-five {
+-  background-image: url(e862b2a488.jpg);
++  background-image: url(figure3.jpg);
+ }
+ 
+ .swiper-image-six {
+@@ -110,7 +110,7 @@ Home Slider
+   height: 100%;
+ }
+ .swiper-image-inner {
+-  background-size: cover;
++  background-size: contain;
+   background-position: center center;
+   display: flex;
+   flex-direction: column;
+@@ -122,7 +122,7 @@ Home Slider
+   background-blend-mode: overlay;
+ }
+ .swiper-image-inner.swiper-image-left {
+-  padding: 4rem;
++  padding: 0rem;
+ }
+ .swiper-image-left {
+   filter: sepia(100%);
+@@ -136,13 +136,13 @@ Home Slider
+   filter: hue-rotate(-60deg);
+   transition: all 1s linear;
+   transition-delay: 1s;
+-  background-color: hsla(0, 0%, 0%, 0.5);
+-  background-blend-mode: multiply;
++  background-color: hsla(0, 0%, 0%, 0.2);
++  background-blend-mode: overlay;
+ }
+ h1 {
+   font-family: 'Cormorant Garamond', serif;
+   font-weight: 500;
+-  color: #fff;
++  color: #0d0c0c;
+   align-self: flex-start;
+   margin: 0 0 auto 0;
+   font-size: 4.5rem;
+@@ -158,6 +158,7 @@ h1 span.emphasis {
+   transition: all .8s cubic-bezier(0.215, 0.61, 0.355, 1) 1.2s;
+   transform: translate3d(-20%, 0, 0);
+   display: inline-block;
++  color: #0d0c0c;
+ }
+ h1 span:not(.emphasis) {
+   font-size: 3.5rem;
+@@ -192,7 +193,7 @@ p.paragraph {
+   transform: translate3d(-20%, 0, 0);
+ }
+ .swiper-slide.swiper-slide-active .swiper-image-right {
+-  filter: hue-rotate(90deg);
++  filter: sepia(0%);
+ }
+ 
+ .swiper-slide.swiper-slide-active h1,
+diff --git a/templates/home.html b/templates/home.html
+index 002d449..3ee01d6 100644
+--- a/templates/home.html
++++ b/templates/home.html
+@@ -23,7 +23,7 @@
+         <div class="swiper-slide swiper-slide-one">
+           <div class="swiper-image" data-swiper-parallax-y="-20%">
+             <div class="swiper-image-inner swiper-image-left swiper-image-one">
+-              <h1>AI3603 <span class="emphasis">Final Project</span>. <br><span>Image Style Translation</span></h1>
++              <h1>AI3603 <span class="emphasis">Final Project</span> <br><br><span, style="color: aliceblue;">Image Style Translation</span></h1>
+               <p>Minghao Liu <br><br>Siyuan Qi <br><br> Shixiang Song
+             </div>
+           </div>
+@@ -56,7 +56,7 @@
+           <div class="swiper-image" data-swiper-parallax-y="35%">
+             <div class="swiper-image-inner swiper-image-right swiper-image-six">
+               <p class="paragraph">
+-                An example of CycleGan produced.   
++                An example of Diffusion Model produced.   
+               </p>
+             </div>
+           </div>

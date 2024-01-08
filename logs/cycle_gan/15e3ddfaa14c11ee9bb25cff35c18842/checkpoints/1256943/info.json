@@ -1,0 +1,1 @@
+{"cycle_loss": "cycle_loss.pth", "discriminator_x": "discriminator_x.pth", "discriminator_y": "discriminator_y.pth", "gan_loss": "gan_loss.pth", "generator_xy": "generator_xy.pth", "generator_yx": "generator_yx.pth", "identity_loss": "identity_loss.pth"}
